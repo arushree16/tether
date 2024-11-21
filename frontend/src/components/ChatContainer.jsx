@@ -54,7 +54,7 @@ const ChatContainer = () => {
             className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
             ref={messageEndRef}
           >
-            <div className=" chat-image avatar">
+            <div className="chat-image avatar">
               <div className="size-10 rounded-full border">
                 <img
                   src={
@@ -71,7 +71,7 @@ const ChatContainer = () => {
                 {formatMessageTime(message.createdAt)}
               </time>
             </div>
-            <div className="chat-bubble flex flex-col">
+            <div className="chat-bubble flex flex-col space-y-2">
               {message.image && (
                 <img
                   src={message.image}
@@ -80,6 +80,15 @@ const ChatContainer = () => {
                 />
               )}
               {message.text && <p>{message.text}</p>}
+              {message.voiceNote && (
+                <audio
+                  controls
+                  src={message.voiceNote}
+                  className="mt-2 rounded-md w-full sm:max-w-[250px]"
+                >
+                  Your browser does not support the audio element.
+                </audio>
+              )}
             </div>
           </div>
         ))}
@@ -89,4 +98,5 @@ const ChatContainer = () => {
     </div>
   );
 };
+
 export default ChatContainer;
